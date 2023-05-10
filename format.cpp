@@ -12,13 +12,17 @@ int main()
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD pos{2, 1}; */
 
+	char c = 'a';
+	if (c != 'b') fmt::print("niet");
+	char d = 'b';
+	if (d == 'b') fmt::print("wel");
 	
-	double a{.1}, b{1}, c{1.1}, d{10};
+/* 	double a{.1}, b{1}, c{1.1}, d{10};
 	fmt::print("a: {:.0f}; b: {:.0f}, c: {:.0f}; d: {:.0f}\n", a, b, c, d);
 	fmt::print("a: {:.1f}; b: {:.1f}; c: {:.1f}; d: {:.1f}\n", a, b, c, d);
 	fmt::print("a: {:.2f}; b: {:.2f}; c: {:.2f}; d: {:.2f}\n", a, b, c, d);
 	// fmt::print("{:.0f},{:.0f}\n\n", a, (a - floor(a)) * 100);
-	fmt::print("{.0f}", a);
+	fmt::print("{.0f}", a); */
 
 
 	/* while (1) {
