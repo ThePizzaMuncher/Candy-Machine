@@ -20,6 +20,7 @@ snacc snaccs[3][3] = {
 	{snacc("Bounty", 31, 1.5), snacc("Mars", 32, 1), snacc("KitKat", 33, 1.2)},
 	{snacc("Milka", 41, 2.5), snacc("Lion", 42, 2), snacc("Croky", 43, 2)}
 };
+
 void choose();
 int payment(int &i, int &j, int &k);
 void delivery(int &j, int &k, bool l);
