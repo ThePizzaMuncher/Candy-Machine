@@ -48,15 +48,15 @@ int main()
 void choose()
 {
 	// char c stores the user’s input, int i is the int that those make
-	char c[2]; int i{0};
+	char c[2]{'0','0'}; int i{0};
 	while (c[0] != '2' && c[0] != '3' && c[0] != '4') {
 		c[0] = getch();
 	}
 	clearScreen();
-	print("{}", c);
+	print("{}", c[0]);
 	while (c[1] != '1' && c[1] != '2' && c[1] != '3') {
 		c[1] = getch();
-	} setPos(45,6); i = (c[0] - '0') * 10 + (c[1] - '0');
+	} i = (c[0] - '0') * 10 + (c[1] - '0'); setPos(45,6);
 	int j{c[0] - '0'}, k{c[1] - '0'}; j -= 2; --k;
 	int reTurn = payment(i, j, k);
 	if (reTurn == 2) return;
@@ -118,7 +118,7 @@ void delivery(int &j, int &k, bool l)
 	print("{: ^36}", snaccs[j][k].name); cMove(1);
 
 	cin.clear();
-	system("pause > nul");
+	
 	
 	clearScreen();
 	print("Tot ziens!");
