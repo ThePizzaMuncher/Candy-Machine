@@ -20,6 +20,7 @@ snacc snaccs[3][3] = {
 	{snacc("Bounty", 31, 1.5), snacc("Mars", 32, 1), snacc("KitKat", 33, 1.2)},
 	{snacc("Milka", 41, 2.5), snacc("Lion", 42, 2), snacc("Croky", 43, 2)}
 };
+
 void choose();
 int payment(int &i, int &j, int &k);
 void delivery(int &j, int &k, bool l);
@@ -35,24 +36,27 @@ void clearScreen() { setPos(45,6); print("{: <28}", " "); cMove(1); print("{: <2
 int main()
 {
 	prePrint();
-	setPos(45,6);
-	print("Maak uw keuze...");
-	choose();
+	while (true)
+	{
+		setPos(45,6);
+		print("Maak uw keuze...");
+		choose();
+	}
 	return 0;
 }
 
 void choose()
 {
 	// char c stores the user’s input, int i is the int that those make
-	char c[2]; int i{0};
-	while (i != 50 && i != 51 && i != 52) {
-		i = getch();
-	} c[0] = char(i);
+	char c[2]{'0','0'}; int i{0};
+	while (c[0] != '2' && c[0] != '3' && c[0] != '4') {
+		c[0] = getch();
+	}
 	clearScreen();
-	print("{}", c);
-	i = 0; while (i != 49 && i != 50 && i != 51) {
-		i = getch();
-	} c[1] = char(i); setPos(45,6); i = (c[0] - '0') * 10 + (c[1] - '0');
+	print("{}", c[0]);
+	while (c[1] != '1' && c[1] != '2' && c[1] != '3') {
+		c[1] = getch();
+	} i = (c[0] - '0') * 10 + (c[1] - '0'); setPos(45,6);
 	int j{c[0] - '0'}, k{c[1] - '0'}; j -= 2; --k;
 	int reTurn = payment(i, j, k);
 	if (reTurn == 2) return;
@@ -112,8 +116,10 @@ void delivery(int &j, int &k, bool l)
 	setPos(3,34);
 	print("{: ^36}", snaccs[j][k].name); cMove(1);
 	print("{: ^36}", snaccs[j][k].name); cMove(1);
-	getch();
-	system("pause");
+
+	cin.clear();
+	
+	
 	clearScreen();
 	print("Tot ziens!");
 	setPos(3,34);
