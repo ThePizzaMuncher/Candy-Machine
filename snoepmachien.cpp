@@ -14,7 +14,7 @@ COORD pos{0,0};
 
 using namespace fmt;
 
-// 
+
 snacc snaccs[3][3] = {
 	{snacc("M&Ms", 21, 2.2), snacc("Snickers", 22, 1.5), snacc("Twix", 23, 1.5)},
 	{snacc("Bounty", 31, 1.5), snacc("Mars", 32, 1), snacc("KitKat", 33, 1.2)},
