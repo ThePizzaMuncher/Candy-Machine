@@ -21,7 +21,7 @@ snacc snaccs[3][3] = {
 	{snacc("Milka", 41, 2.5), snacc("Lion", 42, 2), snacc("Croky", 43, 2)}
 };
 
-void choose();
+bool choose();
 int payment(int &i, int &j, int &k);
 void delivery(int &j, int &k, bool l);
 void prePrint();
@@ -36,32 +36,41 @@ void clearScreen() { setPos(45,6); print("{: <28}", " "); cMove(1); print("{: <2
 int main()
 {
 	prePrint();
-	while (true)
+	
+	bool chooose = true;
+	while (chooose)
 	{
 		setPos(45,6);
 		print("Maak uw keuze...");
-		choose();
+		chooose = choose();
 	}
+	system("cls");
 	return 0;
 }
 
-void choose()
+bool choose()
 {
-	// char c stores the user’s input, int i is the int that those make
+	// char c[] stores the user’s inputs, int i is the int that those make
 	char c[2]{'0','0'}; int i{0};
 	while (c[0] != '2' && c[0] != '3' && c[0] != '4') {
 		c[0] = getch();
+		if (c[0] == 3) return false;
 	}
 	clearScreen();
 	print("{}", c[0]);
 	while (c[1] != '1' && c[1] != '2' && c[1] != '3') {
 		c[1] = getch();
+		if (c[1] == 3) return false;
 	} i = (c[0] - '0') * 10 + (c[1] - '0'); setPos(45,6);
 	int j{c[0] - '0'}, k{c[1] - '0'}; j -= 2; --k;
-	int reTurn = payment(i, j, k);
-	if (reTurn == 2) return;
-	if (reTurn == 1) delivery(j, k, true);
-	else delivery(j, k, false);
+	int rtrn = payment(i, j, k);
+	if (rtrn == 2) return false;
+	delivery(j, k, rtrn);
+	return true;
+	// bool retrn = rtrn; delivery(j, k, retrn);
+	// rtrn == 1 ? delivery(j, k, true) : delivery(j, k, false);
+	// if (rtrn == 1) delivery(j, k, true);
+	// else if (rtrn == 0) delivery(j, k, false);
 }
 
 int payment(int &i, int &j, int &k)
@@ -79,21 +88,27 @@ no:
 		switch (x) {
 			case 49:
 				paid += 0.1;
-			break; case 50:
+			break;
+			case 50:
 				paid += 0.2;
-			break; case 51:
+			break;
+			case 51:
 				paid += 0.5;
-			break; case 52:
+			break;
+			case 52:
 				paid += 1;
-			break; case 53:
+			break;
+			case 53:
 				paid += 2;
-			break; case 48:
+			break;
+			case 3:
 				clearScreen();
 				print("Afgebroken"); cMove(1); print("Tot ziens");
 				Sleep(3000);
 				clearScreen();
 				return 2;
-			break; default:
+			break;
+			default:
 				goto no;
 		}
 		print("€{},{:.0f}", int(paid), (paid - floor(paid)) * 100);
@@ -102,15 +117,15 @@ no:
 		setPos(44,25);
 		double diff = paid - snaccs[j][k].price;
 		print("{}", format("{: ^32}", format("│{:.0},{:.0f}│", floor(diff), (diff - floor(diff)) * 100)));
-		return 1;
+		return true;
 	}
-	return 0;
+	return false;
 }
 
 void delivery(int &j, int &k, bool l)
 {
 	clearScreen();
-	print("Neem uw {}", snaccs[j][k].name); if (l == true) print(" en wisselstacks"); cMove(1);
+	print("Neem uw {}", snaccs[j][k].name); if (l) print(" en wisselstacks"); cMove(1);
 	print("(Druk op toets op te nemen)");
 
 	setPos(3,34);

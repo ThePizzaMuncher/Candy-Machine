@@ -3,19 +3,20 @@
 #include <string>
 #include <conio.h>
 #include <windows.h>
+#include <stdlib.h>
 
 #define setPos SetConsoleCursorPosition
+
+/* bool boem()
+{
+	return;
+} */
 
 int main()
 {
 	/* system("cls");
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD pos{2, 1}; */
-
-	char c = 'a';
-	if (c != 'b') fmt::print("niet");
-	char d = 'b';
-	if (d == 'b') fmt::print("wel");
 	
 /* 	double a{.1}, b{1}, c{1.1}, d{10};
 	fmt::print("a: {:.0f}; b: {:.0f}, c: {:.0f}; d: {:.0f}\n", a, b, c, d);
@@ -24,10 +25,15 @@ int main()
 	// fmt::print("{:.0f},{:.0f}\n\n", a, (a - floor(a)) * 100);
 	fmt::print("{.0f}", a); */
 
+	int c = getch();
+	fmt::print("{}\n", c);
 
-	/* while (1) {
-		int x = getch();
-		fmt::print("{}\n", x);
+/* 	char input; int i{0};
+	while (!_kbhit()) {
+		fmt::print("{}\n", ++i);
+		Sleep(2000);
+		fmt::print("{}\n", ++i);
+		Sleep(2000);
 	} */
 
 	/* fmt::print("╔{:═>80}", "╗\n");
