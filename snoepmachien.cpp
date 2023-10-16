@@ -14,7 +14,7 @@ COORD pos{0,0};
 
 using namespace fmt;
 
-
+// These are all the snacks that will be presented in the “machine”.
 snacc snaccs[3][3] = {
 	{snacc("M&Ms", 21, 2.2), snacc("Snickers", 22, 1.5), snacc("Twix", 23, 1.5)},
 	{snacc("Bounty", 31, 1.5), snacc("Mars", 32, 1), snacc("KitKat", 33, 1.2)},
@@ -148,17 +148,20 @@ void prePrint()
 {
 	system("cls");
 
+	// prints the machine
 	print("╔{:═>79}", "╗"); cMove(1);
 	for (int i{0}; i < 40; ++i, cMove(1))
 		print("║{: >79}", "║");
 	print("╚{:═>79}", "╝");
 
+	// prints the window
 	setPos(2,1);
 	print("┏{:━>38}", "┓");
 	for (cMove(1); pos.Y < 30; cMove(1))
 		print("┃{: >38}", "┃");
 	print("┗{:━>38}", "┛");
 	
+	// prints all of the snacks in the machine
 	setPos(3,2);
 	for (int i{0}; i < 3; ++i) {
 		for (int j{0}; j < 3; ++j)
@@ -170,11 +173,9 @@ void prePrint()
 	}
 	setPos(44,5);
 	print("┌{:─>30}", "┐"); cMove(1);
-	print("│{: >30}", "│"); cMove(1);
+	print("│{: >30}", "│"); cMove(1); // prints the screen
 	print("│{: >30}", "│"); cMove(1);
 	print("└{:─>30}", "┘"); cMove(1,-1);
-	// for (char c{'a'}; c <= 'z'; ++c) print("{}", c);
-	// for (int i{0}; i < 3; ++i) print("{}", i);
 
 	cMove(-1,3);
 	for (int i{1}; pos.Y < 15; cMove(2)) {
@@ -186,16 +187,16 @@ void prePrint()
 	
 	cMove(2);
 	print("{: ^32}", "┌─┐┌┐"); cMove(1);
-	print("{: ^32}", "└─┘││"); cMove(1);
+	print("{: ^32}", "└─┘││"); cMove(1); // prints the coin slot and return button
 	print("{: ^32}", "   └┘"); cMove(4);
 
-	print("{: ^32}", "┌────┐"); cMove(1);
+	print("{: ^32}", "┌────┐"); cMove(1); // prints the coin return box
 	print("{: ^32}", "│    │"); cMove(1);
 	print("{: ^32}", "└────┘");
 
 	setPos(2,32);
 	print("╔{:═>38}", "╗");
-	for (cMove(1); pos.Y < 37; cMove(1))
+	for (cMove(1); pos.Y < 37; cMove(1)) // prints the output box
 		print("║{: >38}", "║");
 	print("╚{:═>38}", "╝");
 }
@@ -203,18 +204,18 @@ void prePrint()
 
 
 // These functions control the cursor
-void cMove(short offsetY)
+void cMove(short offsetY) // moves the cursor left or right
 {
 	pos.Y += offsetY;
 	SetConsoleCursorPosition(hOut, pos);
-} void cMove(short offsetX, short offsetY)
+} void cMove(short offsetX, short offsetY) // moves the cursor up or down and left or right
 {
 	pos.X += offsetX;
 	pos.Y += offsetY;
 	SetConsoleCursorPosition(hOut, pos);
 }
 
-void setPos(short x, short y)
+void setPos(short x, short y) // sets the cursor to an absolute position
 {
 	pos = {x,y};
 	SetConsoleCursorPosition(hOut, pos);
